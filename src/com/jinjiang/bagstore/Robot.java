@@ -43,13 +43,13 @@ public class Robot implements Lockers {
     }
 
     @Override
-    public double getFullRate() {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+    public  double getFullRate() {
+        return 0;
     }
 
     @Override
     public boolean contains(Ticket key) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return false;
     }
 
     public boolean isFull() {

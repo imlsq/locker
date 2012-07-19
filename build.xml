@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="locker" default="all" basedir="." >
+<project name="locker" default="all" basedir="." xmlns:sonar="antlib:org.sonar.ant">
     <property name="src.dir" value="src" />
     <property name="test.dir" value="test" />
     <property name="lib.dir" value="lib" />
@@ -51,6 +51,25 @@
         <fail if="test.failed"  />
     </target>
 
-    <target name="all" depends="clean,compile,run-tests,judge.failed" />
+    <target name="sonar" depends="compile">
+        <taskdef uri="antlib:org.sonar.ant" resource="org/sonar/ant/antlib.xml"/>
+        <property name="sonar.host.url" value="http://localhost:9000" />
+        <property name="sonar.sources" value="${src.dir}" />
+        <property name="sonar.tests" value="${test.dir}" />
+        <property name="sonar.binaries" value="${classes.dir}" />
+        <property name="sonar.surefire.reportsPath" value="${reports.junit.dir}" />
+
+        <!-- The following properties are required to use JaCoCo: -->
+        <!-- 1. Tells Sonar to run the unit tests -->
+        <property name="sonar.dynamicAnalysis" value="true" />
+        <!-- 2. Tells Sonar which "tests" targets to run -->
+        <property name="sonar.jacoco.antTargets" value="run-tests" />
+        <!-- 3. Tells Sonar to use JaCoCo as the code coverage engine -->
+        <property name="sonar.core.codeCoveragePlugin" value="jacoco" />
+        <sonar:sonar key="locker" version="1.0" xmlns:sonar="antlib:org.sonar.ant" />
+    </target>
+
+
+    <target name="all" depends="clean,compile,sonar,judge.failed" />
 
 </project>
