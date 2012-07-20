@@ -6,13 +6,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Administrator
- * Date: 7/18/12
- * Time: 3:26 PM
- * To change this template use File | Settings | File Templates.
- */
 public class RobotManagerTest {
 
     @Test
